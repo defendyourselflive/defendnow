@@ -1,0 +1,1023 @@
+<!DOCTYPE html>    
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💲1 𓂀CODE𓁿</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Search Bar Styles */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto;
+    }
+    #searchInput {
+      width: 400px; /* Doubled from 200px */
+      padding: 20px 30px; /* Doubled from 10px 15px */
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      border-radius: 30px 0 0 30px;
+      color: #fff;
+      font-size: 2em; /* Doubled from 1em */
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    #searchInput::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    #searchInput:focus {
+      box-shadow: 0 0 20px rgba(0,255,255,1);
+    }
+    #searchButton {
+      padding: 20px 40px; /* Doubled from 10px 20px */
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 0 30px 30px 0;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2em; /* Doubled from 1em */
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    #searchButton:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 20px rgba(255,0,255,1);
+    }
+
+    /* Home Button Styles */
+    #homeButtonContainer {
+      display: none; /* Initially hidden */
+      text-align: center;
+      margin-top: 20px;
+    }
+    #homeButton {
+      padding: 20px 40px; /* Doubled from 10px 20px */
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2em; /* Doubled from 1em */
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    #homeButton:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 20px rgba(255,0,255,1);
+    }
+
+    /* Success Message */
+    #successMessage {
+      background: rgba(0, 255, 0, 0.2);
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    /* Folders Grid */
+    .folders {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .folder {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      margin: 20px;
+      width: 250px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      will-change: transform, opacity; /* Performance Optimization */
+    }
+
+    /* Animation for folder appearance */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .folder.fade-in {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .folder:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    .folder img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #fff;
+    }
+
+    /* Folder Name Styles */
+    .folder-name {
+      margin-top: 20px;
+      font-size: 1.0em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(270deg, #00ffff, #ff00ff, #00ffff);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradient-animation 10s ease infinite;
+      text-shadow: 0 0 10px rgba(0,255,255,0.7), 0 0 20px rgba(255,0,255,0.7);
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    /* Gradient Animation */
+    @keyframes gradient-animation {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .download-btn {
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1em;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .download-btn:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+    }
+
+    /* Button Container */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .button-container .download-btn {
+      margin: 0 10px;
+    }
+
+    /* Pagination Controls */
+    .pagination-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .pagination button {
+      padding: 20px 30px;
+      margin: 0 5px;
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 2em; 
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    .pagination button:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 20px rgba(255,0,255,1);
+    }
+    .pagination button.active {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 20px rgba(255,0,255,1);
+    }
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .folder {
+        width: 90%;
+      }
+    }
+
+    /* Futuristic Hieroglyphics Background */
+    .futuristic-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+      background: #000000;
+    }
+    .futuristic-background::before {
+      content: '𓂀 𓀀 𓃰 𓄿 𓅓 𓆑 𓆣 𓇳 𓈖 𓉻 𓊽 𓋴 𓌷 𓍑 𓎼 𓏇 𓐍 𓁿 𓃂 𓄿 𓅱 𓆑 𓇯 𓈇 𓉿 𓊪 𓋹 𓌂  𓍬 𓎛 𓏥 𓐛 ';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 200px;
+      line-height: 1.2;
+      text-align: center;
+      color: #00ffff;
+      opacity: 0.05;
+      animation: flicker 3s infinite linear alternate;
+      white-space: pre-wrap;
+      max-width: 1000px;
+      overflow: hidden;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.02; color: #00ffff; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.1; color: #ff00ff; transform: translate(-50%, -50%) scale(1.05); }
+      100% { opacity: 0.05; color: #00ffff; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* ========== FUTURISTIC NEON MODERN CONFETTI LOGO ========== */
+    .logo-container {
+      position: absolute;
+      top: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 2;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .one-dollar-logo {
+      display: inline-block;
+      font-size: 3.2em;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff, 0 0 10px #ff0, 0 0 15px #f0f;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    /* Keyframes to cycle through "O N E D O L L A R" confetti letters */
+    @keyframes confettiOneDollar {
+      0% { content: "O"; }
+      5% { content: "O N"; }
+      10% { content: "O N E"; }
+      15% { content: "O N E  D"; }
+      20% { content: "O N E  D O"; }
+      25% { content: "O N E  D O L"; }
+      30% { content: "O N E  D O L L"; }
+      35% { content: "O N E  D O L L A"; }
+      40% { content: "O N E  D O L L A R"; }
+      50% { content: "O N E  D O L L A R"; }
+      60% { content: "O N E  D O L L A R"; opacity: 1; }
+      80% { opacity: 0; }
+      100% { content: ""; opacity: 0; }
+    }
+
+    .one-dollar-logo::after {
+      content: "";
+      animation: confettiOneDollar 8s infinite;
+      white-space: pre;
+    }
+
+    /* Confetti simulation: Falling neon particles */
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fallConfetti {
+      0% { transform: translate(-50%, -100%) rotate(0deg); opacity: 1; }
+      100% { transform: translate(-50%, 150%) rotate(720deg); opacity: 0; }
+    }
+
+    .confetti::before, .confetti::after {
+      content: "➀";
+      position: absolute;
+      font-size: 8.0em;
+      color: #ff00ff;
+      animation: fallConfetti 6s linear infinite;
+    }
+    .confetti::after {
+      content: "💲";
+      left: 30px;
+      font-size: 7.0em;
+      color: #00ffff;
+      animation-duration: 10s;
+    }
+
+    /* Enlarge Button Styles */
+    .enlarge-btn {
+      padding: 8px 16px;
+      background: linear-gradient(45deg, #00ffff, #ff00ff);
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+      font-size: 0.9em;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+      z-index: 3;
+    }
+    .enlarge-btn:hover {
+      background: linear-gradient(45deg, #ff00ff, #00ffff);
+      box-shadow: 0 0 30px rgba(0,255,255,1), 0 0 60px rgba(255,0,255,1);
+    }
+    .enlarge-btn:active {
+      box-shadow: 0 0 30px rgba(255,0,255,1), 0 0 60px rgba(0,255,255,1);
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+    }
+    .modal-content {
+      margin: 5% auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border: 5px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .modal-close:hover,
+    .modal-close:focus {
+      color: #bbb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    div[style*="text-align:center; margin: 20px 0;"] .download-btn {
+      font-size: 1.35em;
+      padding:100px 100px;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+    div[style*="text-align:center; margin: 20px 0;"] .download-btn:hover {
+      box-shadow: 0 0 30px rgba(0,255,255,1), 0 0 60px rgba(255,0,255,1);
+    }
+    div[style*="text-align:center; margin: 20px 0;"] .download-btn:active {
+      box-shadow: 0 0 30px rgba(255,0,255,1), 0 0 60px rgba(0,255,255,1);
+      transform: scale(0.95);
+    }
+
+    div[style*="text-align:center; margin:40px 0;"] .download-btn {
+      padding: 25px 25px;
+      box-sizing: border-box;
+      clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+      -webkit-clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+    }
+
+    /* ===== NEW STYLES FOR MAIN ATTRACTION BUTTON ===== */
+    .main-attraction-button {
+      font-size: 1.0em !important;
+      padding: 25px 25px !important;
+      position: relative;
+      border: none;
+      border-radius: 25px;
+      background: linear-gradient(45deg, #ff0000, #0000ff, #ff0000);
+      background-size: 500% 500%;
+      animation: sirenBackground 0.1s linear infinite;
+      color: #fff;
+      text-shadow: 0 0 30px #ffffff;
+      box-shadow: 0 0 20px rgba(255,0,0,1), 0 0 40px rgba(0,0,255,1);
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      z-index: 999;
+    }
+
+    @keyframes sirenBackground {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 50%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .main-attraction-button:hover {
+      transform: scale(1.10);
+      box-shadow: 0 0 30px rgba(255,0,0,1), 0 0 60px rgba(0,0,255,1);
+    }
+
+    .main-attraction-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 60px rgba(0,0,255,1), 0 0 90px rgba(255,0,0,1);
+    }
+
+    /* ===== NEW CSS for the .APK button container ===== */
+    .mobile-apk-button-container {
+      position: fixed;
+      top: 220px;
+      left: 35px;
+      text-align: left;
+      margin-top: 0;
+      z-index: 3;
+    }
+    .mobile-apk-button-container {
+      display: none !important;
+    }
+
+    /* Countdown Timer */
+    .countdown-container {
+      position: absolute;
+      top: 20px;
+      right: 5px;
+      font-family: 'Orbitron', sans-serif;
+      color: #ff0000;
+      font-size: 1.5em;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+      z-index: 2;
+      animation: neon-flicker 0.1s infinite alternate;
+    }
+
+    @keyframes neon-flicker {
+      from {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+      }
+      to {
+        text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+      }
+    }
+
+    .code-display {
+      font-size: 1.0em;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      animation: code-glow 1s infinite;
+    }
+
+    @keyframes code-glow {
+      0% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+      50% {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+    }
+
+    /* Neon Banner (Top Right) */
+    .neon-banner-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 60px;
+      background: radial-gradient(circle at center, #00ffff 0%, #ff00ff 70%, #000000 100%);
+      border: 2.0px solid #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+      position: absolute;
+      top: 50px;
+      right: 5px;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .neon-banner-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 180deg at center, #ff00ff, #00ffff, #ff00ff);
+      animation: spinGradient 1.0s linear infinite;
+      opacity: 1.0;
+    }
+
+    @keyframes spinGradient {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .neon-banner-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      font-weight: bold;
+      z-index: 1;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+      overflow: hidden;
+    }
+
+    .neon-banner-text {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .banner-word {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrollLeft 20s linear infinite;
+    }
+
+    @keyframes scrollLeft {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    div[style*="text-align:center; margin-top:40px;"] .neon-banner-container {
+      position: relative !important;
+      display: inline-block !important;
+      top: auto !important;
+      right: auto !important;
+      width: 500px !important;
+      height: 500px !important;
+      border-radius: 100% !important;
+      clip-path: none !important;
+      overflow: hidden !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    div[style*="text-align:center; margin-top:50px;"] .neon-banner-text {
+      display: inline-block !important;
+      animation: rainfall 0.1s linear infinite !important;
+      white-space: nowrap;
+    }
+
+    @keyframes rainfall {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    .dollar-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .dollar-particles .dollar {
+      position: absolute;
+      font-size: 3em;
+      color: #00ffff;
+      opacity: 0;
+      animation: fadeInOut 3s infinite ease-in-out;
+      animation-delay: calc(var(--i) * 0.5s);
+    }
+
+    @keyframes fadeInOut {
+      0%   { opacity: 0; transform: scale(0.5) translateY(10px); }
+      25%  { opacity: 1; transform: scale(1) translateY(0); }
+      75%  { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 0; transform: scale(0.5) translateY(-10px); }
+    }
+
+    .category-button {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      background: radial-gradient(circle at center, #00ffff 0%, #ff00ff 70%, #000000 100%);
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+      box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+      transition: all 0.3s ease;
+      padding: 1px 1px;
+      margin: 5px;
+      cursor: pointer;
+      clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+      -webkit-clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+      outline: none;
+      border: none;
+    }
+
+    .category-button:hover {
+      background: radial-gradient(circle at center, #ff00ff 0%, #00ffff 70%, #000000 100%);
+      box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff;
+      transform: scale(1.05);
+    }
+
+    .category-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Futuristic Hieroglyphics Background -->
+  <div class="futuristic-background"></div>
+
+  <!-- Futuristic background with random 💲 symbol -->
+  <div class="dollar-particles">
+    <span class="dollar" style="--i:1; top:10%; left:15%;">𓂀</span>
+    <span class="dollar" style="--i:2; top:20%; left:70%;">𓂀</span>
+    <span class="dollar" style="--i:3; top:30%; left:40%;">𓂀</span>
+    <span class="dollar" style="--i:4; top:40%; left:80%;">𓂀</span>
+    <span class="dollar" style="--i:5; top:50%; left:25%;">𓂀</span>
+    <span class="dollar" style="--i:6; top:60%; left:60%;">𓁿</span>
+    <span class="dollar" style="--i:16; top:85%; left:65%;">𓁿</span>
+    <span class="dollar" style="--i:17; top:95%; left:35%;">𓁿</span>
+    <span class="dollar" style="--i:18; top:15%; left:55%;">𓁿</span>
+    <span class="dollar" style="--i:20; top:65%; left:10%;">𓁿</span>
+  </div>
+
+  <!-- Logo at the top -->
+  <div class="logo-container">
+    <div class="one-dollar-logo"></div>
+    <div class="confetti"></div>
+  </div>
+
+  <!-- Countdown Timer at top right -->
+  <div class="countdown-container" id="countdown">
+    <span id="days">00</span>.<span id="hours">00</span>.<span id="minutes">00</span>.<span id="seconds">00</span>
+  </div>
+
+  <!-- Play Button at top left -->
+  <div class="play-button-container">
+    <div class="play-button" id="playAudioButton" aria-label="Play Audio"></div>
+  </div>
+
+  <!-- .APK Button (Top Left) -->
+  <div class="mobile-apk-button-container">
+    <a 
+      href="./downloads/💲1𓂀CODE𓁿.apk" 
+      download 
+      class="download-btn main-attraction-button" 
+      style="font-size:0.5em; padding:11px 11px;"
+    >
+      .APK
+    </a>
+  </div>
+
+  <div class="container">
+    <!-- Get $1 Code Button (Main Attraction) -->
+    <div style="text-align:center; margin: 20px 0;">
+      <a class="download-btn main-attraction-button" style="font-size:1.35em; padding:16px 27px;" href="https://onedollarcode.live/" target="_blank">Purchase Your💲1 𓂀CODE𓁿</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Welcome to💲1 𓂀CODE𓁿">
+      <button id="searchButton">Search</button>
+    </div>
+
+    <!-- Category Buttons -->
+    <div style="text-align:center; margin: 40px 0;">
+      <button class="download-btn category-button" onclick="filterByPrefix('MOV_')">🎦🎥🎦</button>
+      <button class="download-btn category-button" onclick="filterByPrefix('TV_')">📺📼📺</button>
+      <button class="download-btn category-button" onclick="filterByPrefix('EBOOK_')">📘📖📚</button>
+      <button class="download-btn category-button" onclick="filterByPrefix('APK_')">📱🤖📱</button>
+      <button class="download-btn category-button" onclick="filterByPrefix('PC_')">#️⃣🖥️#️⃣</button>
+    </div>
+
+    <!-- Home Button (Initially Hidden) -->
+    <div id="homeButtonContainer">
+      <button id="homeButton">Home</button>
+    </div>
+    
+    <!-- Success Message -->
+    <div id="successMessage" style="display: none;">
+      <span id="successText"></span>
+    </div>
+
+    <!-- Folders Container -->
+    <div id="foldersContainer" class="folders">
+      <!-- Folders will be dynamically inserted here -->
+    </div>
+
+    <!-- Pagination Controls Bottom -->
+    <div id="paginationControlsBottom" class="pagination-controls"></div>
+
+    <!-- Move Banner to Bottom Right -->
+    <div style="position: fixed; top: 120px; right: 5px;">
+      <div class="neon-banner-container" style="position:relative; display:flex; align-items:center; justify-content:center; top:auto; right:auto; width:165px; height:165px;">
+        <div class="neon-banner-text" style="text-align:center;">
+          <span class="banner-word">⬆️⬆️⬆️FREE CODE⬆️⬆️⬆️</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for Enlarged Image -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" aria-label="Close Modal">&times;</span>
+    <img class="modal-content" id="modalImage" alt="Enlarged Folder Image">
+  </div>
+
+  <!-- Added Audio Element -->
+  <audio id="backgroundAudio" src="audio/play-sound.mp3" preload="auto"></audio>
+
+  <!-- Countdown Timer Script -->
+  <script>
+    const targetDate = new Date("2025-01-01T23:45:00").getTime();
+
+    const countdownInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days.toString().padStart(2, '0');
+      document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+      document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+      document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+      if (distance < 0) {
+        clearInterval(countdownInterval);
+        const countdownElement = document.getElementById("countdown");
+        countdownElement.innerHTML = '<span class="code-display">𓂀CODE𓁿</span>';
+      }
+    }, 1000);
+  </script>
+
+  <script>
+    let currentPage = 1;
+    const foldersPerPage = 50;
+    let allFolders = [];
+    let filteredFolders = [];
+
+    async function fetchFolders() {
+      try {
+        const response = await fetch('/api/folders');
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        return data.folders;
+      } catch (error) {
+        console.error('Error fetching folders:', error);
+        return [];
+      }
+    }
+
+    function createFolderElement(folder) {
+      const folderDiv = document.createElement('div');
+      folderDiv.className = 'folder';
+
+      const enlargeBtn = document.createElement('button');
+      enlargeBtn.textContent = '🔎Info';
+      enlargeBtn.className = 'enlarge-btn';
+      enlargeBtn.setAttribute('aria-label', 'View Information');
+      enlargeBtn.onclick = () => enlargeImage(folderDiv.querySelector('img').src);
+      folderDiv.appendChild(enlargeBtn);
+
+      const folderImage = document.createElement('img');
+      folderImage.alt = `${folder} Image`;
+
+      const encodedFolderName = encodeURIComponent(folder);
+      const imageExtensions = ['png', 'jpg', 'jpeg', 'gif'];
+
+      function loadImage(index) {
+        if (index >= imageExtensions.length) {
+          folderImage.src = './images/default.png';
+          return;
+        }
+        const ext = imageExtensions[index];
+        folderImage.src = `./images/${encodedFolderName}.${ext}`;
+        folderImage.onerror = () => loadImage(index + 1);
+      }
+      loadImage(0);
+
+      const folderName = document.createElement('div');
+      folderName.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
+      folderName.className = 'folder-name';
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.className = 'button-container';
+
+      const downloadBtn = document.createElement('button');
+      downloadBtn.textContent = '💾DOWNLOAD NOW';
+      downloadBtn.onclick = () => downloadFolder(folder);
+      downloadBtn.className = 'download-btn';
+
+      buttonContainer.appendChild(downloadBtn);
+      folderDiv.appendChild(folderImage);
+      folderDiv.appendChild(folderName);
+      folderDiv.appendChild(buttonContainer);
+      return folderDiv;
+    }
+
+    function downloadFolder(folder) {
+      const otp = prompt("𓂀E N T E R 💲1  C O D E𓁿");
+      if (!otp) return;
+      fetch('/authenticate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ otp: otp.trim(), folder })
+      })
+      .then(r => r.text())
+      .then(html => document.body.innerHTML = html)
+      .catch(err => {
+        console.error('Error:', err);
+        alert('An error occurred while processing your request.');
+      });
+    }
+
+    function displayFolders(folders) {
+      const container = document.getElementById('foldersContainer');
+      container.innerHTML = '';
+
+      const totalPages = Math.ceil(folders.length / foldersPerPage);
+      const start = (currentPage - 1) * foldersPerPage;
+      const end = start + foldersPerPage;
+      const slice = folders.slice(start, end);
+
+      slice.forEach((f, i) => {
+        const el = createFolderElement(f);
+        container.appendChild(el);
+        el.style.animationDelay = `${i * 0.1}s`;
+        el.classList.add('fade-in');
+      });
+
+      renderPaginationControls(totalPages);
+    }
+
+    function renderPaginationControls(totalPages) {
+      const controls = document.getElementById('paginationControlsBottom');
+      controls.innerHTML = '';
+      controls.appendChild(createPaginationElement(totalPages));
+    }
+
+    function createPaginationElement(totalPages) {
+      const div = document.createElement('div');
+      div.className = 'pagination';
+
+      const prev = document.createElement('button');
+      prev.textContent = 'Prev';
+      prev.disabled = currentPage === 1;
+      prev.onclick = () => { if (currentPage > 1) { currentPage--; displayFolders(filteredFolders); }};
+      div.appendChild(prev);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.onclick = () => { currentPage = i; displayFolders(filteredFolders); };
+        div.appendChild(btn);
+      }
+
+      const next = document.createElement('button');
+      next.textContent = 'Next';
+      next.disabled = currentPage === totalPages;
+      next.onclick = () => { if (currentPage < totalPages) { currentPage++; displayFolders(filteredFolders); }};
+      div.appendChild(next);
+
+      return div;
+    }
+
+    function filterFolders() {
+      const filter = document.getElementById('searchInput').value.toLowerCase();
+      filteredFolders = allFolders.filter(f => f.toLowerCase().includes(filter));
+      currentPage = 1;
+      displayFolders(filteredFolders);
+      document.getElementById('homeButtonContainer').style.display = filter ? 'block' : 'none';
+    }
+
+    function filterByPrefix(prefix) {
+      filteredFolders = allFolders.filter(f => f.startsWith(prefix));
+      currentPage = 1;
+      displayFolders(filteredFolders);
+      document.getElementById('homeButtonContainer').style.display = 'block';
+    }
+
+    async function init() {
+      allFolders = await fetchFolders();
+      allFolders.sort((a, b) => a.localeCompare(b));
+      filteredFolders = allFolders;
+
+      if (!allFolders.length) {
+        document.getElementById('foldersContainer').innerHTML = '<p>No folders available.</p>';
+        return;
+      }
+      displayFolders(filteredFolders);
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('success') === 'true' && params.get('folder')) {
+        document.getElementById('successText').textContent =
+          `Successfully authenticated for "${params.get('folder')}". You can now download from this folder.`;
+        document.getElementById('successMessage').style.display = 'block';
+      }
+
+      document.getElementById('searchInput').addEventListener('keyup', filterFolders);
+      document.getElementById('searchButton').addEventListener('click', filterFolders);
+
+      document.getElementById('homeButton').addEventListener('click', () => {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('homeButtonContainer').style.display = 'none';
+        filteredFolders = allFolders;
+        currentPage = 1;
+        displayFolders(filteredFolders);
+      });
+
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      document.getElementsByClassName('modal-close')[0].onclick = () => modal.style.display = 'none';
+      window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
+
+      const playBtn = document.getElementById('playAudioButton');
+      const audio = document.getElementById('backgroundAudio');
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play();
+          playBtn.setAttribute('aria-label', 'Pause Audio');
+          playBtn.style.background = 'radial-gradient(circle at 30% 30%, #00ffff, #000000)';
+        } else {
+          audio.pause();
+          playBtn.setAttribute('aria-label', 'Play Audio');
+          playBtn.style.background = 'radial-gradient(circle at 30% 30%, #ff00ff, #000000)';
+        }
+      });
+    }
+
+    function enlargeImage(src) {
+      document.getElementById('modalImage').src = src;
+      document.getElementById('imageModal').style.display = 'block';
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>

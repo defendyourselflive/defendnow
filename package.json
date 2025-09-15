@@ -1,0 +1,35 @@
+{
+  "name": "protected-content-server",
+  "version": "1.0.0",
+  "description": "A Node.js server that protects content folders with OTPs.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "generate-otp": "node generateOtp.js"
+  },
+  "keywords": [
+    "express",
+    "otp",
+    "protected-content"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "express-session": "^1.18.1",
+    "fs": "^0.0.1-security",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "uuid": "^11.0.3",
+    "aws-sdk": "^2.1234.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
